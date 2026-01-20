@@ -1,0 +1,7 @@
+[
+  { "id": 1, "name": "Afsana", "age": 15, "marriage": false },
+  { "id": 2, "name": "Junayed", "age": 15, "marriage": false },
+  { "id": 3, "name": "Janntun", "age": 15, "marriage": false },
+  { "id": 4, "name": "Mimi", "age": 15, "marriage": true },
+  { "id": 5, "name": "Afsana azam", "age": 15, "marriage": false }
+]
