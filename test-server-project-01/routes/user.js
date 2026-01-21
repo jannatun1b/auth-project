@@ -7,6 +7,7 @@ import {
   getAllUser,
   loginInUser,
   loginUser,
+  logoutUser,
   resendOTP,
   resetPassword,
   singleUser,
@@ -24,6 +25,7 @@ router.post('/login', loginUser);
 router.post('/registration', createUser);
 router.post('/verify-user', verifyAndLoginUser);
 router.post('/reset-otp', resendOTP);
+router.post('/logout', logoutUser);
 
 // fotget password
 router.post('/forgot-password', forgotPassword);

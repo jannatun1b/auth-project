@@ -1,9 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import Cookies from 'js-cookie';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
     baseUrl: 'http://localhost:5050/api/v1/user', // backend base url
+    credentials: 'include',
+    prepareHeaders: (headers) => {
+      const token = Cookies.get('authToken');
+      if (token) {
+        headers.set('authorization', `Bearer ${token}`);
+      }
+      return headers;
+    },
   }),
   tagTypes: ['Auth'],
   endpoints: (builder) => ({
@@ -36,9 +45,22 @@ export const authApi = createApi({
     // Login
     loginUser: builder.mutation({
       query: (data) => ({
-        url: '/auth/login',
+        url: '/login',
         method: 'POST',
         body: data,
+      }),
+    }), // Login
+    logInUser: builder.query({
+      query: () => ({
+        url: '/me',
+        method: 'GET',
+      }),
+    }),
+    // Login
+    logout: builder.mutation({
+      query: () => ({
+        url: '/logout',
+        method: 'POST',
       }),
     }),
   }),
@@ -49,4 +71,6 @@ export const {
   useVerifyOtpMutation,
   useLoginUserMutation,
   useResendOtpMutation,
+  useLogoutMutation,
+  useLogInUserQuery,
 } = authApi;

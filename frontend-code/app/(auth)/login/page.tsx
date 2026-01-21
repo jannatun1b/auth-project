@@ -1,7 +1,11 @@
 'use client';
 
+import { useLoginUserMutation } from '@/app/features/auth/authApi';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { FaEnvelope, FaLock } from 'react-icons/fa';
+import Swal from 'sweetalert2';
+import Cookies from 'js-cookie';
 
 type LoginFormData = {
   email: string;
@@ -14,9 +18,40 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>();
+  const router = useRouter();
+  const [loginUser] = useLoginUserMutation();
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log('Login Data:', data);
+  const token = Cookies.get('authToken');
+  console.log(token, 'token');
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      // ✅ Call API
+      const res = await loginUser(data).unwrap();
+      console.log(res, 'response data');
+
+      // ✅ Set email in localStorage
+      localStorage.setItem('email', data.email);
+
+      // ✅ SweetAlert Success
+      await Swal.fire({
+        icon: 'success',
+        title: 'Login Successful!',
+        text: 'User login successfully.',
+      });
+
+      // ✅ Redirect to verification page
+      router.push('/');
+    } catch (error: any) {
+      // console.error('Registration error:', error?.data?.error || error.message);
+
+      // ✅ SweetAlert Error
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: error?.data?.message,
+      });
+    }
   };
 
   return (

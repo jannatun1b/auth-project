@@ -160,7 +160,7 @@ export const verifyAndLoginUser = async (req, res) => {
     res
       .status(200)
       .cookie('authToken', token, {
-        httpOnly: true,
+        httpOnly: false,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
@@ -268,7 +268,7 @@ export const loginUser = async (req, res) => {
     res
       .status(200)
       .cookie('authToken', token, {
-        httpOnly: true, // JS থেকে cookie access করা যাবে না (security)
+        httpOnly: false, // JS থেকে cookie access করা যাবে না (security)
         secure: false, // HTTPS হলে true (production এ)
         sameSite: 'strict', // CSRF protection
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
@@ -284,6 +284,33 @@ export const loginUser = async (req, res) => {
     });
   }
 };
+
+/**
+ * Logout User
+ * @route POST /api/v1/user/logout
+ * @access Private
+ */
+export const logoutUser = async (req, res) => {
+  try {
+    res
+      .clearCookie('authToken', {
+        httpOnly: false,
+        secure: false, // production এ true
+        sameSite: 'strict',
+      })
+      .status(200)
+      .json({
+        success: true,
+        message: 'User logged out successfully',
+      });
+  } catch (error) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Logout failed',
+    });
+  }
+};
+
 /**
  * LoginIn User
  * @param {*} req

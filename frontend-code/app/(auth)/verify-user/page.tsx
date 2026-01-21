@@ -36,6 +36,8 @@ const Verification = () => {
       };
       // ✅ unwrap() function call
       const res = await postVerfiy(payload).unwrap();
+      // token save
+      localStorage.setItem('authToken', res.token);
       console.log(res, 'response data');
       await Swal.fire({
         icon: 'success',
