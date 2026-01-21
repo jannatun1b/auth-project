@@ -58,7 +58,7 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-blue-500 to-purple-600 px-4">
+    <div className="min-h-screen flex items-center justify-center  from-indigo-600 via-blue-500 to-purple-600 px-4">
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl p-6 sm:p-8">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6">
           Student Registration

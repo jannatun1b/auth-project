@@ -8,7 +8,7 @@ import Link from 'next/link';
 const Home: React.FC = () => {
   return (
     <AuthGuard>
-      <main className="min-h-screen bg-gradient-to-br from-indigo-50 to-white flex items-center justify-center px-4">
+      <main className="min-h-screen from-indigo-50 to-white flex items-center justify-center px-4">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 text-center">
           {/* Title */}
           <h1 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back 👋</h1>

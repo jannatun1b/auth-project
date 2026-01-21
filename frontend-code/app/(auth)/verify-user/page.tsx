@@ -78,7 +78,7 @@ const Verification = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-indigo-600 via-blue-500 to-purple-600 px-4">
+    <div className="min-h-screen flex items-center justify-center  from-indigo-600 via-blue-500 to-purple-600 px-4">
       <div className="w-full max-w-md bg-white rounded-2xl shadow-2xl p-6 sm:p-8 text-center">
         {/* Icon */}
         <div className="flex justify-center mb-4">
